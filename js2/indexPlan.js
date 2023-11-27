@@ -27,7 +27,7 @@ class Plan {
             <address>
               <i class="fa-solid fa-location-dot"></i>${this.location}
             </address>
-            <button><span>${this.buttonText}</span>К-с эхэлье</button>
+            <a href="./plan.html?planName=${this.title}&tag=${this.tag}"" ><button class="value"><span>${this.buttonText}</span>-c эхэлье</button></a>
       `;
       return article;
   }
@@ -68,7 +68,7 @@ class PlanRenderer {
     targetElement.innerHTML = ''; // Clear existing content
 
     this._plansList.sort((a, b) => b.stars - a.stars);
-    this._plansList.slice(0, 3).forEach(planData => {
+    this._plansList.slice(0, 4).forEach(planData => {
         const plan = new Plan(planData);
         targetElement.appendChild(plan.render());
     });
