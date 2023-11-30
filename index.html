@@ -24,7 +24,7 @@
     <script src="./component/search.js"></script>
     <script src="./jsmodule/function.js"></script>
     <!-- <script src="./js2/indexPlan.js"></script> -->
-    <script src="./jsmodule/indexPlace.js"></script>
+    <!-- <script src="./jsmodule/indexPlace.js"></script> -->
     <!-- <script src="./component/plan-list.js"></script> -->
   </head>
   <body>
@@ -32,91 +32,21 @@
       <all-header></all-header>
     </header>
     <main>
-      <div class="Lsearch">
-        <search-place></search-place>
-      </div>
+      
+      <search-place></search-place>
+      <section class="back-section">
+        
+      </section>
       <plan-list></plan-list>
-
-      <h2>Санал болгочихъё</h2>
-      <section class="placesToRecommend">
-        <article class="BigRecommend">
-          <img
-            src="https://eguur.mn/wp-content/uploads/2021/07/DSC00068.jpg"
-            alt="sanalBolgoh1"
-          />
-          <div>
-            <h3>Үндэсний соёл амралтын хүрээлэн</h3>
-            <meter value="0.85" min="0.0" max="5.0">
-              <i class="fa-solid fa-star"></i> <span>4</span>
-            </meter>
-            <p>Хүрээлэн</p>
-            <address>СБД, 1-р хороо - УБ, Сөүл гудамж</address>
-            <i class="far fa-clock"></i>
-            <time>7:30-21:00</time> <br />
-            <button><span>10</span>К-с эхэлье</button>
-          </div>
-        </article>
-        <div class="subRecommend">
-          <article class="RecommendPlacesToFlex">
-            <img src="./zurag/sura.jpg" alt="sanalBolgoh2" />
-
-            <div class="details">
-              <h3>Sura</h3>
-              <meter value="0.85" min="0.0" max="5.0">
-                <i class="fa-solid fa-star"></i> <span>4</span>
-              </meter>
-              <p>Хоолны газар</p>
-              <address>СБД, 1-р хороо - УБ, Сөүл гудамж</address>
-              <i class="far fa-clock"></i>
-              <time>7:30-21:00</time><br />
-              <button><span>20</span>К-с эхэлье</button>
-            </div>
-          </article>
-
-          <article class="RecommendPlacesToFlex">
-            <div class="image">
-              <img src="./zurag/sura.jpg" alt="sanalBolgoh2" />
-            </div>
-            <div class="details">
-              <h3>Sura</h3>
-              <meter value="0.85" min="0.0" max="5.0">
-                <i class="fa-solid fa-star"></i> <span>4</span>
-              </meter>
-              <p>Хоолны газар</p>
-              <address>СБД, 1-р хороо - УБ, Сөүл гудамж</address>
-              <i class="far fa-clock"></i>
-              <time>7:30-21:00</time><br />
-              <button><span>20</span>К-с эхэлье</button>
-            </div>
-          </article>
-
-          <article class="RecommendPlacesToFlex">
-            <div class="image">
-              <img src="./zurag/sura.jpg" alt="sanalBolgoh2" />
-            </div>
-            <div class="details">
-              <h3>Sura</h3>
-              <meter value="0.85" min="0.0" max="5.0">
-                <i class="fa-solid fa-star"></i> <span>4</span>
-              </meter>
-              <p>Хоолны газар</p>
-              <address>СБД, 1-р хороо - УБ, Сөүл гудамж</address>
-              <i class="far fa-clock"></i>
-              <time>7:30-21:00</time><br />
-              <button><span>20</span>К-с эхэлье</button>
-            </div>
-          </article>
-        </div>
-      </section>
-      <h2>Шинээр нэмэгдсэн</h2>
-      <section class="newPlaces">
-      </section>
-      <index-plan></index-plan>
+      <rec-place-list></rec-place-list>
+      <place-list></place-list>
     </main>
 
     <footer>
       <all-footer></all-footer>
     </footer>
     <script src="./component/plan-list.js"></script>
+    <script src="./component/place-list.js"></script>
+    <script src="./component/rec-place-list.js"></script>
   </body>
 </html>

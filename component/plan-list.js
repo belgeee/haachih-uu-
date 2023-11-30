@@ -1,4 +1,3 @@
-
 class PlanList extends HTMLElement {
 
   constructor() {
@@ -21,7 +20,7 @@ class PlanList extends HTMLElement {
     try {
       const response = await fetch(`https://api.jsonbin.io/v3/b/65642e7854105e766fd5f6fd`);
       
-      // Check if the response indicates an exhausted limit
+      
       if (response.status === 429) {
         console.warn('API Requests exhausted. Consider upgrading your plan or waiting for the limit to reset.');
         return;
@@ -36,8 +35,8 @@ class PlanList extends HTMLElement {
     }
   }
   sortPlansByStars() {
-    this.plans.sort((a, b) => b.stars - a.stars); // Sort plans in descending order based on stars
-    this.plans = this.plans.slice(0, 4); // Select the top 4 plans
+    this.plans.sort((a, b) => b.stars - a.stars); 
+    this.plans = this.plans.slice(0, 4); 
   }
   
   
@@ -57,8 +56,36 @@ class PlanList extends HTMLElement {
           padding: 10px;
           text-align: center;
         }
-        @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
- 
+        @import url('https:
+        .back-section{
+          text-align: center;
+          object-fit: contain;
+          width: 100%;
+          height: 50rem;
+          border-radius: 10rem;
+          position: relative;
+          background-image: url('../zurag/background.jpg');
+      }
+     
+      main {
+          width: 85%;
+          margin: auto;
+      }
+       
+      h2 {
+          margin-bottom: 1.5rem;
+          font-size: 22px;
+          color: #333;
+          text-align: center;
+      }
+      h3 {
+          font-size: 20px;
+      }
+       
+      p {
+          color: #555;
+          font-size: 14px;
+      }
 :root {
     --main-color: rgb(10,92,118);
     --secondary-color: rgb(41,151,185);
@@ -73,13 +100,13 @@ class PlanList extends HTMLElement {
     box-sizing: border-box;
 }
  
-/* Body styles */
+
 body {
     font-family: Pangolin;
 }
-/*Дэлгэцний гол хэсэг*/
+
  
-/*Blogcard доторх зураг, товч, одны дизайн*/
+
 article {
     margin-bottom: 1rem;
     border: none;
@@ -145,8 +172,8 @@ article {
                   <i class="fa-solid fa-star"></i> <span>${plan.stars}</span>
                 </meter>
               </div>
-              <button @click="${() => this.handleAddToCart(plan)}">Add to Cart</button>
               <p><i class="fa-solid fa-tag"></i>${plan.tag}</p>
+              <button id="slot" onclick="addtocart('${plan.id}');">Add to Cart</button>
               <address>
                 <i class="fa-solid fa-location-dot"></i>${plan.location}
               </address>
@@ -159,11 +186,6 @@ article {
         </div>
       </section>
     `;
-  }
-  
-
-  handleAddToCart(plan) {
-    this.dispatchEvent(new CustomEvent('add-to-cart', { detail: { plan } }));
   }
 }
 

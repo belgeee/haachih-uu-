@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Switcher</title>
+</head>
+<body>
+
+<img id="myImage" src="../zurag/chili.jpg" alt="Image 1" style="max-width: 100%">
+
+<button onclick="changeImage('next')">Next</button>
+<img src="../zurag/chili.jpg">
+
+<script>
+  var currentImageIndex = 1; // starting index
+
+  function changeImage(direction) {
+    // Define your image sources
+    var imageSources = ["./zurag/chili.jpg", "../zurag/guru.jpg", "image3.jpg"];
+
+    // Update the index based on the direction
+    if (direction === 'next') {
+      currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+    } else if (direction === 'prev') {
+      currentImageIndex = (currentImageIndex - 1 + imageSources.length) % imageSources.length;
+    }
+
+    // Get the image element by its ID
+    var imageElement = document.getElementById('myImage');
+
+    // Update the source attribute with the new image
+    imageElement.src = imageSources[currentImageIndex];
+    imageElement.alt = 'Image ' + (currentImageIndex + 1); // Update alt text if needed
+  }
+</script>
+
+</body>
+</html>

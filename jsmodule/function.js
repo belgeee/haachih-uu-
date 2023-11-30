@@ -8,8 +8,7 @@ function getValueForFilter() {
   var newUrl = "./letsgo.html" + "?countPeople=" + huniiTooValue + "&oirhonGazar=" + oirhonGazarValue + "&type=" + typeValue;
   window.location.href = newUrl;
 }
-
-
+  
 
 function addtocart(id) {
     // Fetch current data
