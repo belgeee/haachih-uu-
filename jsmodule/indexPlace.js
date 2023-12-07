@@ -32,21 +32,27 @@ class PlaceRenderer {
         this._categoryFilter = categoryFilter;
     }
 
-    fetchAndRenderPlaces(targetElement) {
-        fetch(this._apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data && Array.isArray(data.record)) {
-                    this._placesList = this.filterPlacesByCategory(data.record);
-                    this.renderPlaces(targetElement);
-                } else {
-                    console.error('Error: Expected an array of records in the response');
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching places data:', error);
-            });
+    async fetchAndRenderPlaces(targetElement) {
+        try {
+            const response = await fetch(this._apiUrl);
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+    
+            if (data && Array.isArray(data.record)) {
+                this._placesList = this.filterPlacesByCategory(data.record);
+                this.renderPlaces(targetElement);
+            } else {
+                console.error('Error: Expected an array of records in the response');
+            }
+        } catch (error) {
+            console.error('Error fetching or parsing data:', error.message);
+        }
     }
+    
 
     filterPlacesByCategory(placesData) {
         if (!this._categoryFilter) {

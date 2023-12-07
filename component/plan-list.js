@@ -46,46 +46,8 @@ class PlanList extends HTMLElement {
   
     this.shadowRoot.innerHTML = `
       <style>
-        .plans {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-          gap: 20px;
-        }
-        .subPlans {
-          border: 1px solid #ccc;
-          padding: 10px;
-          text-align: center;
-        }
-        @import url('https:
-        .back-section{
-          text-align: center;
-          object-fit: contain;
-          width: 100%;
-          height: 50rem;
-          border-radius: 10rem;
-          position: relative;
-          background-image: url('../zurag/background.jpg');
-      }
-     
-      main {
-          width: 85%;
-          margin: auto;
-      }
-       
-      h2 {
-          margin-bottom: 1.5rem;
-          font-size: 22px;
-          color: #333;
-          text-align: center;
-      }
-      h3 {
-          font-size: 20px;
-      }
-       
-      p {
-          color: #555;
-          font-size: 14px;
-      }
+      @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+ 
 :root {
     --main-color: rgb(10,92,118);
     --secondary-color: rgb(41,151,185);
@@ -100,13 +62,13 @@ class PlanList extends HTMLElement {
     box-sizing: border-box;
 }
  
-
+/* Body styles */
 body {
     font-family: Pangolin;
 }
-
+/*Дэлгэцний гол хэсэг*/
  
-
+/*Blogcard доторх зураг, товч, одны дизайн*/
 article {
     margin-bottom: 1rem;
     border: none;
@@ -155,10 +117,127 @@ article {
             padding: 0.4rem;
             border-radius: 0.7rem;  
         }
+}
+meter{
+    height: 1.8rem;
+}
+      main {
+        width: 85%;
+        margin: auto;
+    }
+     
+    h2 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
+        text-align: center;
+    }
+     
+     article {
+        & img {
+        max-width: 100%;
+        border-radius: 1rem;
+        margin-bottom: 2%;
         }
-        meter{
-            height: 1.8rem;
+        & h3 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+    }
+     
+    p {
+        color: #555;
+        font-size: 14px;
+    }
+     
+    .Lsearch {
+        padding-top: 30rem;
+        display: flex;
+        text-align: center;
+        overflow: hidden;
+        margin-left: 30%;
+        border-radius: 20px;
+        width: 50%;
+        margin: 2rem;
+        margin-left: 25%;
+        & select, button{
+            flex: 1;
+            font-size: 14px;
         }
+        & select{
+            width: 8rem;
+            padding: 0.5rem;
+            font-family: pangolin;
+            color:#666666 ;
+            background-color: #ffffff;
+            opacity: 60%;
+        }
+        & button {
+            background-image: linear-gradient(to bottom right, #0A5C76, #2FA2C6);
+            color: #fff;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            font-family: pangolin;
+        }
+        & button:hover {
+            background-color: #0056b3;
+        }
+        & #huniiToo {
+            border-radius: 20px 0 0 20px;
+        }
+        & .option1, .option2, .option3 {
+            text-align: center;
+            font-size: 16px;
+            width: 10px;
+            height: 50px;
+            border-radius: var(--border-radius);
+        }
+      }
+     
+    button {
+        border: none;
+        border-radius: var(--border-radius);
+        background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        padding: 0.7em 0.7em;
+        font-size: 1em;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+     
+    .plan-container{
+
+        & .plans {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            & .subPlans {
+                border: 1px solid #ccc;
+                padding: 15px;
+                background-color: #fff;
+                transition: box-shadow 0.3s;
+                max-width: 16rem; /* Set a maximum width */
+                width: 100%; /* Fill available space */
+                margin: 0 10px 20px; /* Add some margin for spacing */
+                border-radius: 1rem;
+            }
+            & .subPlans:hover{
+                background-color: #d0dce9;
+                transition: 0.4s;
+            }
+            & button{
+                margin-top: 2%;
+            }
+            & img{
+                border-radius: 20px;
+            }
+        }
+    }
       </style>
       <section class='plan-container'>
         <h2>Топ л гээд байгаам чинь</h2>
