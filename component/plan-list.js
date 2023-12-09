@@ -4,7 +4,7 @@ class PlanList extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
     this.plans = [];
-  }
+  }     
 
   connectedCallback() {
     this.fetchPlans();
@@ -173,13 +173,7 @@ meter{
             background-color: #ffffff;
             opacity: 60%;
         }
-        & button {
-            background-image: linear-gradient(to bottom right, #0A5C76, #2FA2C6);
-            color: #fff;
-            border: none;
-            border-radius: 0 20px 20px 0;
-            font-family: pangolin;
-        }
+        
         & button:hover {
             background-color: #0056b3;
         }
@@ -195,38 +189,42 @@ meter{
         }
       }
      
-    button {
-        border: none;
-        border-radius: var(--border-radius);
-        background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        padding: 0.7em 0.7em;
-        font-size: 1em;
-    }
+    
     button:hover {
         background-color: #0056b3;
     }
      
     .plan-container{
 
-        & .plans {
+        & .item {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            & .subPlans {
+            & .value{
+              & button {
+                border: none;
+                border-radius: var(--border-radius);
+                background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+                color: white;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                padding: 0.7em 0.7em;
+                font-size: 1em;
+            }
+            } 
+            & .PlanInfo {
+                height:29rem;
                 border: 1px solid #ccc;
                 padding: 15px;
                 background-color: #fff;
                 transition: box-shadow 0.3s;
-                max-width: 16rem; /* Set a maximum width */
+                max-width: 17rem; /* Set a maximum width */
                 width: 100%; /* Fill available space */
                 margin: 0 10px 20px; /* Add some margin for spacing */
                 border-radius: 1rem;
             }
-            & .subPlans:hover{
+            & .PlanInfo:hover{
                 background-color: #d0dce9;
                 transition: 0.4s;
             }
@@ -235,15 +233,16 @@ meter{
             }
             & img{
                 border-radius: 20px;
+                height:14rem;
             }
         }
     }
       </style>
       <section class='plan-container'>
         <h2>Топ л гээд байгаам чинь</h2>
-        <div class="plans">
+        <div class="item">
           ${plans.map(plan => `
-            <article class='subPlans'>
+            <article class='PlanInfo'>
               <img src="${plan.image}" alt="${plan.title}" />
               <div class="title">
                 <h3>${plan.title}</h3>
@@ -252,7 +251,7 @@ meter{
                 </meter>
               </div>
               <p><i class="fa-solid fa-tag"></i>${plan.tag}</p>
-              <button id="slot" onclick="addtocart('${plan.id}');">Add to Cart</button>
+              <add-to-card></add-to-card>
               <address>
                 <i class="fa-solid fa-location-dot"></i>${plan.location}
               </address>

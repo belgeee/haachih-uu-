@@ -7,36 +7,30 @@ class RecommendPlaceList extends HTMLElement {
   }
 
   connectedCallback() {
-    this.fetchPlaces();
-  }
+    const topAttr = this.getAttribute('topPlace');
+    const topCount = parseInt(topAttr);
+    this.fetchPlaces(topCount);
+}
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'selected-category' && oldValue !== newValue) {
-      this.fetchPlaces();
-    }
-  }
-
-  async fetchPlaces() {
+async fetchPlaces(topCount) {
     try {
-      const response = await fetch(`https://api.jsonbin.io/v3/b/65642e6812a5d376599f7004`);
-
-      if (response.status === 429) {
-        console.warn('API Requests exhausted. Consider upgrading your plan or waiting for the limit to reset.');
-        return;
-      }
-
-      const data = await response.json();
-      this.places = data.record || [];
-      this.sortAndSlicePlaces();
-      this.render();
+        const response = await fetch(`https://api.jsonbin.io/v3/b/65642e6812a5d376599f7004`);
+        if (response.status === 429) {
+            console.warn('API Requests exhausted. Consider upgrading your plan or waiting for the limit to reset.');
+            return;
+        }
+        const data = await response.json();
+        this.places = data.record || [];
+        this.sortAndSlicePlaces(topCount);
+        this.render();
     } catch (error) {
-      console.error('Error fetching places:', error);
+        console.error('Error fetching places:', error);
     }
-  }
+}
 
-  sortAndSlicePlaces() {
-    this.places.sort((a, b) => b.stars - a.stars);
-    this.places = this.places.slice(0, 4);
+  sortAndSlicePlaces(topCount) {
+      this.places.sort((a, b) => b.stars - a.stars);
+      this.places = this.places.slice(0, topCount);
   }
 
   render() {
@@ -228,7 +222,6 @@ class RecommendPlaceList extends HTMLElement {
         </article>
         <section class="subRecommend">
           ${places
-            .slice(1, 4)
             .map((place) => {
               return `
                 <article class="RecommendPlacesToFlex">
@@ -256,9 +249,6 @@ class RecommendPlaceList extends HTMLElement {
     `;
   }
 
-  handleAddToCart(place) {
-    this.dispatchEvent(new CustomEvent('add-to-cart', { detail: { place } }));
-  }
 }
 
 customElements.define('rec-place-list', RecommendPlaceList);

@@ -22,7 +22,7 @@ class Plan {
         article.innerHTML = `
             <div class="PlanImage">
                 <img src="${this.image}" alt="${this.title}">
-                <meter value="0.85" min="0.0" max="5.0"><i class="fa-solid fa-star"></i> <span>${this.stars}</span></meter>
+                <meter value="${this.stars}" min="0.0" max="5.0"><i class="fa-solid fa-star"></i> <span>${this.stars}</span></meter>
             </div>
             <div class="PlanInfo">
                 <h3>${this.title}</h3>

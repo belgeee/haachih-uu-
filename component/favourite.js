@@ -1,4 +1,4 @@
-class WatchLaterList {
+class FavouriteList {
     constructor(plans) {
         this.plans = plans; 
         
@@ -7,7 +7,7 @@ class WatchLaterList {
     render_later_list() {
         return `
         <article class="item">
-        <div class="PlanImage">
+    <div class="PlanImage">
         <img src="${this.plans.image}" alt="${this.plans.title}">
         <meter value="0.85" min="0.0" max="5.0"><i class="fa-solid fa-star"></i> <span>${this.plans.stars}</span></meter>
     </div>
@@ -18,7 +18,7 @@ class WatchLaterList {
             <i class="fa-solid fa-tag"></i>
             ${this.plans.tag}
         </p>
-        <add-to-card></add-to-card>
+        
         <address>
             <i class="fa-solid fa-location-dot"></i>
             ${this.plans.location}
@@ -38,7 +38,7 @@ class WatchLaterList {
     }
 }
 
-class WatchLaterComponent extends HTMLElement {
+class FavouriteListComponent extends HTMLElement {
     constructor() {
         super();
         this.lists = [];
@@ -50,13 +50,25 @@ class WatchLaterComponent extends HTMLElement {
 
 
     addToCart(myProduct) {
-        console.log(myProduct);
-        this.lists.push(myProduct);
-        const product = new WatchLaterList(myProduct);
-        this.listJSON.push(myProduct);
-        localStorage.setItem("lists", JSON.stringify(this.listJSON));
-        this.watchNum++;
-        this.returnValue += product.render_later_list(); 
+        // console.log(myProduct);
+        // this.lists.push(myProduct);
+        // const product = new FavouriteList(myProduct);
+        // this.listJSON.push(myProduct);
+        // localStorage.setItem("lists", JSON.stringify(this.listJSON));
+        // this.watchNum++;
+        // this.returnValue += product.render_later_list(); 
+        const isDuplicate = this.listJSON.some((existingProduct) => existingProduct.title === myProduct.title);
+        if (!isDuplicate) {
+            this.lists.push(myProduct);
+            const product = new FavouriteList(myProduct);
+            this.listJSON.push(myProduct);
+            localStorage.setItem("lists", JSON.stringify(this.listJSON));
+            this.watchNum++;
+            this.returnValue += product.render_later_list();
+            window.alert("successfully added");
+        } else {
+            window.alert(`You alread added "${myProduct.title}" in your favourite.`);
+        }
     }
 
     
@@ -64,11 +76,11 @@ class WatchLaterComponent extends HTMLElement {
         if (JSON.parse(localStorage.getItem("lists"))) {
             const lists = JSON.parse(localStorage.getItem("lists"));
             for (const data of lists) {
-                const product = new WatchLaterList(data);
+                const product = new FavouriteList(data);
                 this.returnValue += product.render_later_list();
             }
             if (document.querySelector(".plans")) {
-                document
+                document    
                     .querySelector(".plans")
                     .insertAdjacentHTML("beforeend", this.returnValue);
             }
@@ -76,7 +88,20 @@ class WatchLaterComponent extends HTMLElement {
             if (document.querySelector(".plans")) {
                 document.querySelector(
                     ".plans"
-                ).innerHTML = `<style>.checkout-button{display:none;}</style><h2 class="baihgui">Here is no plans.</h2>`;
+                ).innerHTML = `<style>
+                .checkout-button{display:none;} 
+                .checkout-button{
+                    border: none;
+                    border-radius: var(--border-radius);
+                    background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+                    color: white;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                    padding: 0.7em 0.7em;
+                    font-size: 1em;
+                }
+                </style>
+                <h2 class="baihgui">Here is no plans.</h2>`;
             }
         }
     }
@@ -96,4 +121,4 @@ class WatchLaterComponent extends HTMLElement {
     }
 }
 
-window.customElements.define("later-comp", WatchLaterComponent);
+window.customElements.define("favourite-plan", FavouriteListComponent);

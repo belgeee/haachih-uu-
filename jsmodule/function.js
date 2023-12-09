@@ -5,7 +5,7 @@ function getValueForFilter() {
   var typeValue = document.getElementById('type').value;
 
   // Display selected values
-  var newUrl = "./letsgo.html" + "?countPeople=" + huniiTooValue + "&oirhonGazar=" + oirhonGazarValue + "&type=" + typeValue;
+  var newUrl = "./letsgo.html" +  "?address=" + oirhonGazarValue + "&category=" + typeValue+"&countPeople=" + huniiTooValue;
   window.location.href = newUrl;
 }
   

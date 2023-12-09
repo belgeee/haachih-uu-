@@ -15,16 +15,20 @@
     <script type="module" src="./component/favourite.js"></script>
     <link rel="icon" type="image/x-icon" href="./zurag/logo1.png" />
 </head>
+<style>
+</style>
+
 <body>
     <header>
         <all-header></all-header>
     </header>
  
     <main>
-        <later-comp></later-comp>
+        
         <section class="name">
             <h1>Орой яахын ?</h1>
             <hr>
+            <favourite-plan></favourite-plan>
         </section>
         
         <section class="plans">
@@ -32,9 +36,10 @@
             
         </section>
         
+        
  
         <section class="Bugd">              
-            <button class="btn">Бүгдийг харах</button>
+            <button id="toggleButton" class="btn">Бүгдийг харах</button>
             <hr>
         </section>  
     </main>

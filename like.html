@@ -28,8 +28,9 @@
       <section class="plans">
         <h2 class="ilerts">Төлөвлөгөө:</h2>
         <button onclick="removeAll()">removeAll</button>
-          <later-comp>
-          </later-comp>
+          <favourite-plan>
+            
+          </favourite-plan>
       </section>
 
       <section class="place">
@@ -83,7 +84,7 @@
   <script>
     function removeAll(){
             localStorage.removeItem('lists');
-            const comp = document.querySelector('later-comp');
+            const comp = document.querySelector('favourite-plan');
             comp.jsonToCard();
             comp.render_watch();
         }
