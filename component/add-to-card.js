@@ -2,7 +2,8 @@ class AddToCard extends HTMLElement {
     constructor() {
         super();
         this.innerHTML = `
-            <button>Add to Favourite</button>
+
+            <button>Add to card</button>
         `;
     }
 
@@ -19,6 +20,7 @@ class AddToCard extends HTMLElement {
                     "location": planInfoDiv.querySelector('address').textContent.trim(),
                     "buttonText": planInfoDiv.querySelector('a button').textContent.trim(),
                     "stars": PlanImageDiv.querySelector('meter').textContent.trim(),
+                    "type":"plan",
                     "unit": 1
                 };
                 list.addToCart(json);

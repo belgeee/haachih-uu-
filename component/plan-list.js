@@ -1,17 +1,47 @@
 class PlanList extends HTMLElement {
-
-  constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.plans = [];
-  }     
-
-  connectedCallback() {
-    this.fetchPlans();
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.plans = [];
+      this._selectedTag = null;
+      this._selectedName = null;
+      this.darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+  
+    connectedCallback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      this._selectedTag = urlParams.get('tag');
+      this._selectedName = urlParams.get('planName');
+  
+      const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      darkModeMediaQuery.addListener(() => {
+        this.darkMode = darkModeMediaQuery.matches;
+        this.render();
+      });
+  
+      this.fetchPlans();
+    }   
+  // toggleDarkMode() {
+  //   this.darkMode = !this.darkMode;
+  //   this.render();
+  // }
+  static get observedAttributes() {
+    return ['selected-tag'];
+  }
+  static get observedAttributes() {
+    return ['selected-planName'];
   }
 
+ 
+  
+
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === 'selected-category' && oldValue !== newValue) {
+    if (name === 'selected-tag' && oldValue !== newValue) {
+      this._selectedTag = newValue;
+      this.fetchPlans();
+    }
+    if (name === 'selected-planName' && oldValue !== newValue) {
+      this._selectedName = newValue;
       this.fetchPlans();
     }
   }
@@ -29,6 +59,13 @@ class PlanList extends HTMLElement {
       const data = await response.json();
       this.plans = data.record || [];
       this.sortPlansByStars();
+      this.filterPlansByTagAndName();
+      if(this.plans.length==0){
+        console.log('zero');
+        const notify=document.querySelector('.sayNothing');
+        console.log(notify);
+        notify.innerHTML = '<h2>Here are no similar plans.</h2>';
+      }
       this.render();
     } catch (error) {
       console.error('Error fetching plans:', error);
@@ -38,11 +75,21 @@ class PlanList extends HTMLElement {
     this.plans.sort((a, b) => b.stars - a.stars); 
     this.plans = this.plans.slice(0, 4); 
   }
+  filterPlansByTagAndName() {
+    if (this._selectedTag || this._selectedName) {
+        this.plans = this.plans.filter(plan =>
+            (this._selectedTag ? plan.tag.toLowerCase() == this._selectedTag.toLowerCase() : true) &&
+            (this._selectedName ? plan.title.toLowerCase() !== this._selectedName.toLowerCase() : true)
+        );
+    }
+}
+
   
   
 
   render() {
     const plans = this.plans || [];
+    const themeClass = this.darkMode ? 'dark-theme' : 'light-theme';
   
     this.shadowRoot.innerHTML = `
       <style>
@@ -55,6 +102,10 @@ class PlanList extends HTMLElement {
     --border-radius: 1rem;
     --button-border-radius: 1rem;
     --margin-side: 8rem;
+}
+:host(.dark-theme) {
+  background-color: #333;
+  color: #fff;
 }
 *{
     margin: 0;
@@ -223,6 +274,8 @@ meter{
                 width: 100%; /* Fill available space */
                 margin: 0 10px 20px; /* Add some margin for spacing */
                 border-radius: 1rem;
+                background-color: ${this.darkMode ? '#555' : '#fff'};
+                color: ${this.darkMode ? '#fff' : '#333'};
             }
             & .PlanInfo:hover{
                 background-color: #d0dce9;
@@ -239,7 +292,7 @@ meter{
     }
       </style>
       <section class='plan-container'>
-        <h2>Топ л гээд байгаам чинь</h2>
+        
         <div class="item">
           ${plans.map(plan => `
             <article class='PlanInfo'>
