@@ -1,18 +1,19 @@
 @import url(./general.css);
-
-
+ 
+ 
 header {
     width: 100%;
     display: flex;
     flex-direction: row;
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    background-image: linear-gradient(to bottom right, #0A5C76, #2FA2C6);
+    background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+    
     & .dropdown {
         position: relative;
         display: inline-block;
     }
-      
+     
     & .dropdown-content {
         display: none;
         position: absolute;
@@ -23,12 +24,12 @@ header {
         padding: 0.8rem 1rem;
         z-index: 1;
     }
-      
+     
     & .dropdown:hover .dropdown-content {
         display: block;
     }
   }
-
+ 
 nav {
     width: 100%;
     display: flex;  
@@ -54,7 +55,6 @@ nav {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 1rem;
     }
     & svg {
         fill: white;    
@@ -63,15 +63,64 @@ nav {
         padding-top: 1rem;
         padding-bottom: 0.5rem;
         width:250px;
-    } 
+    }
+    & .count {
+        height: 15px;
+        width: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.7rem;
+        font-weight: bold;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        position: sticky;
+        bottom: 0;
+        margin-top: -1rem;
+        margin-left: -0.2rem;
+        background-color: #fff;
+        color: transparent;
+        & span {
+            background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+    }
+    & .countPlace{
+        
+        height: 15px;
+        width: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.7rem;
+        font-weight: bold;
+        border: 2px solid rgb(255, 255, 255);
+        border-radius: 15px;
+        position: sticky;
+        bottom: 0;
+        margin-top: 0.65rem;
+        margin-left: -0.5rem;
+        background-color: #fff;
+        color: transparent;
+        & span {
+            background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+    }
 }
-
-
-
+ 
+ 
+ 
 footer {
     background-image: linear-gradient(to bottom right, var(--main-color), var(--secondary-color));
     display: grid;
-    grid-template-columns: 40% 30% 30%; 
+    grid-template-columns: 40% 30% 30%;
     padding-top: 2rem;
     text-align: left;
     & hr{
@@ -114,9 +163,9 @@ footer {
         margin-left: 15rem;
         width: 70%;
         justify-content: space-around
-    } 
+    }
     & svg {
-        fill: rgb(205, 205, 205); 
+        fill: rgb(205, 205, 205);
     }
     & a:hover{
         color: rgb(10,92,118);;
