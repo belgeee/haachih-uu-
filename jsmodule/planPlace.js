@@ -45,12 +45,10 @@ class PlaceRenderer {
         fetch(this._apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data); 
                     if (data && Array.isArray(data.record)) {
                         this._placesList = this.filterPlacesByPlanName(data.record);
                         if(this._placesList==0){
                             const notify=document.querySelector('.sayNothing1');
-                            console.log(notify);
                             notify.innerHTML = 'Here are no similar places in this plan.';
                         }
                         this.renderPlaces(targetElement);

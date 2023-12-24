@@ -13,6 +13,7 @@
     <script src="./component/header-footer.js"></script>
     <script type="module" src="./component/add-to-card.js"></script>
     <script type="module" src="./component/favouritePlan.js"></script>
+    <script type="module" src="./component/favouritePlace.js"></script>
     <link rel="icon" type="image/x-icon" href="./zurag/logo1.png" />
 </head>
 <style>
@@ -50,11 +51,9 @@
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-            // Get the URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const pageTitle = urlParams.get('tag');
 
-            // Update the h1 content based on the URL parameter
             if (pageTitle) {
                 document.getElementById('pageTitle').textContent = pageTitle;
             }

@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="./css/plan.css">
     <script src="./component/header-footer.js"></script>
     <script src="jsmodule/planPlace.js"></script>
+    <script src="./backend/express.js"></script>
+    <script type="module" src="./backend/postPlan.js"></script>
     <script type="module" src="./component/plan-list.js"></script>
+    <script src="./backend/getPlanCom.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -45,9 +48,20 @@
                 <section class="ratingOnComment">
                         <h4>Сэтгэгдэл</h4>
                         <p id="stars">⭐⭐⭐⭐⭐</p>
-                        <p id="comment">Urana, Oct, 2023 </p>
+                        <!-- <p id="comment">Urana, Oct, 2023 </p>
                         <p>Янзын хөөрхөн төлөвлөгөө байна. Үнэхээр зугаатай байлаа</p>
-                        <p>Энэ төлөвлөгөөний дагуу болзоогоо зохион байгуулсан чинь найз охин минь намайг яасан мэдрэмжтэй юм. Баярлалаа хайраа гэж магтсийшдээ :)</p>
+                        <p>Энэ төлөвлөгөөний дагуу болзоогоо зохион байгуулсан чинь найз охин минь намайг яасан мэдрэмжтэй юм. Баярлалаа хайраа гэж магтсийшдээ :)</p> -->
+                        <form>
+                            <input
+                              type="text"
+                              id="contents"
+                              name="contents"
+                              placeholder="Сэтгэгдэл бичмээр байна уу хө"
+                            />
+                            <button type="button" id="submit-button">
+                              <i class="fa-regular fa-paper-plane"></i>
+                            </button>
+                        </form>
                 </section>
                 </aside>
                 <section class="rateAction>">
@@ -66,7 +80,9 @@
                           <button type="reset">Reset</button>
                           <button type="submit">Submit</button>
                      </form>
+                     
                      </template>
+                     
                 </section>
             </aside>
  
@@ -96,14 +112,21 @@
 //let starRating = document.getElementById("star-rating-template").content;
 //document.body.appendChild(starRating);
 
-customElements.define('star-rating',
-  class extends HTMLElement {
-    constructor() {
-      super(); // Always call super first in constructor
-      const starRating = document.getElementById('star-rating-template').content;
-      const shadowRoot = this.attachShadow({mode: 'open'});
-      shadowRoot.appendChild(starRating.cloneNode(true));
-  }
-});
+// customElements.define('star-rating',
+//   class extends HTMLElement {
+//     constructor() {
+//       super(); // Always call super first in constructor
+//       const starRating = document.getElementById('star-rating-template').content;
+//       const shadowRoot = this.attachShadow({mode: 'open'});
+//       shadowRoot.appendChild(starRating.cloneNode(true));
+//   }
+// });
 </script>
+<script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const planName= urlParams.get('planName');
+                if (pageName) {
+                    document.getElementsByClassName('sayNothing1').textContent = planName;
+                }
+    </script>
 </html>
