@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нэвтрэх</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/login.css">
 </head>
 <body>
-    <main>
-        <aside>
-            <img class="logo" src="/zurag/logo-login.png" alt="haachih_uu?">
-            <a href="login.html"><h3 class="login">Нэвтрэх</h3></a>
-            <a href="login.html"><h3 class="signup">Бүртгүүлэх</h3></a>
-            <form>
-                <input type="text" id="login" placeholder="И-мэйл эсвэл утасны дугаар">
-                <input type="password" id="password" placeholder="Нууц үгээ оруулна уу">
-            </form>
- 
-            <p>Нууц үгээ мартсан уу?</p>
-            <button class="value"> Нэвтрэх </button>
-        </aside>
-        <img class="TomZurag" src="/zurag/hajuu.png" alt="haajuutaliinzurag">
-    </main>
+    <div class="login-box">
+        <form action="/auth" method="post">
+            <h2>Login</h2>
+            <div class="user-box">
+                <input type="text" name="username" autocomplete="off" required>
+                <label>Username or Email Address</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="password" autocomplete="off" required>
+                <label>Password</label>
+            </div>
+            <div class="button">
+                <button type="submit">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Login
+                </button>
+                <p class="register">Don't have any account?<a href="/register">Register Here</a></p>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

@@ -325,7 +325,7 @@ class PlaceList extends HTMLElement {
           ${places.map(place => `
           <article class="subNewPlaces">
           <div class="image">
-              <img src="${place.image}" alt="${place.name}"> <!-- Change 'this.image' to 'place.image' -->
+              <img src="/sura.jpg" alt="${place.name}"> <!-- Change 'this.image' to 'place.image' -->
           </div>
           <div class="details">
           

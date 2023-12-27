@@ -268,7 +268,7 @@ async fetchPlaces(topCount) {
             ? `
             
               <div class="image">
-                <img src="${places[0].image}" alt="${places[0].name}">
+                <img src="/sura.jpg" alt="${places[0].name}">
               </div>
               <div class="details">
               
