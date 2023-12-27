@@ -1,7 +1,7 @@
 class PlanList extends HTMLElement {
     constructor() {
       super();
-      this.attachShadow({ mode: 'open' });
+      this.myRoot= this.attachShadow({ mode: 'closed' });
       this.plans = [];
       this._selectedTag = null;
       this._selectedName = null;
@@ -18,7 +18,7 @@ class PlanList extends HTMLElement {
         this.darkMode = darkModeMediaQuery.matches;
         this.render();
       });
-  
+      // this.myRoot.innerHTML = ''; 
       this.fetchPlans();
     }   
   // toggleDarkMode() {
@@ -48,7 +48,7 @@ class PlanList extends HTMLElement {
 
   async fetchPlans() {
     try {
-      const response = await fetch(`https://api.jsonbin.io/v3/b/657d8960dc7465401883f81a`);
+      const response = await fetch(`https://api.jsonbin.io/v3/b/658bccaadc74654018895226`);
       
       
       if (response.status === 429) {
@@ -97,8 +97,8 @@ filterByTagName(){
   render() {
     const plans = this.plans || [];
     const themeClass = this.darkMode ? 'dark-theme' : 'light-theme';
-  
-    this.shadowRoot.innerHTML = `
+    
+    this.myRoot.innerHTML = `
       <style>
       <link
     rel="stylesheet"

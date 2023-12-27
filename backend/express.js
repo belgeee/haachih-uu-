@@ -94,9 +94,9 @@ app.post('/notes', async (req, res) => {
     }
 
     try {
-        const [result] = await pool.query('INSERT INTO notes (title, contents) VALUES (?, ?)', [title, contents]);
+        const [result] = await pool.query('INSERT INTO stars (title, contents) VALUES (?, ?)', [title, contents]);
         const id = result.insertId;
-        const newNote = await pool.query('SELECT * FROM notes WHERE id = ?', [id]);
+        const newNote = await pool.query('SELECT * FROM stars WHERE id = ?', [id]);
         res.status(201).send(newNote[0]);
     } catch (error) {
         console.error('Error executing query:', error);
@@ -112,4 +112,24 @@ app.use((err, req, res, next) => {
 const PORT = 8080; // Change the port to 8081
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
+});
+
+
+
+app.post('/stars', async (req, res) => {
+    const { title, contents } = req.body;
+
+    if (!title || !contents) {
+        return res.status(400).send('Title and contents are required');
+    }
+
+    try {
+        const [result] = await pool.query('INSERT INTO stars (title, contents) VALUES (?, ?)', [title, contents]);
+        const id = result.insertId;
+        const newNote = await pool.query('SELECT * FROM stars WHERE id = ?', [id]);
+        res.status(201).send(newNote[0]);
+    } catch (error) {
+        console.error('Error executing query:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });

@@ -25,7 +25,8 @@ class Place {
                     <p class="timen"><i class="fa-regular fa-clock"></i><time datetime="2023-02-08">${this.hours}</time></p>
                     <h4>Танилцуулга: </h4>
                     <p class="intro">Янзын хөөрхөн төлөвлөгөө байна. Үнэхээр зугаатай байлаа.</p>
-                    <a href='../place.html'><button class="value"><span>${this.buttonText}</span>К-с эхэлнэ</button></a>          
+                    <a href='../place.html'><button class="value"><span>${this.buttonText}</span>К-с эхэлнэ</button></a>     
+                    <p class="invisible">${this.planName}</p>      
                 </div>
             </article>
         `;
@@ -70,7 +71,9 @@ class PlaceRenderer {
         const lowerCaseFilter = this._planNameFilter.toLowerCase();
         return placesData.filter(place => place.planName.toLowerCase().includes(lowerCaseFilter));
     }
-    
+    // getPLanName(){
+    //     return this.planName;
+    // }
 
     renderPlaces(targetElement) {
         const container = document.querySelector(targetElement);
@@ -87,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const planNameFilter = urlParams.get('planName');
     console.log('Plan Name Filter:', planNameFilter); // Check the value in the console
 
-    const apiUrl = "https://api.jsonbin.io/v3/b/657d8988dc7465401883f827";
+    const apiUrl = "https://api.jsonbin.io/v3/b/658bcbe8dc746540188951e3";
     const placeRenderer = new PlaceRenderer(apiUrl, planNameFilter);
     placeRenderer.fetchAndRenderPlaces('.leftsection');
 });

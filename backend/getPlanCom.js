@@ -14,9 +14,10 @@ class Comment {
       const dateParagraph = document.createElement("time");
       const shortenedDate = this.date.substring(0, 10); 
       dateParagraph.textContent = shortenedDate;
-  
+      
+      // dateParagraph.setAttribute("datetime", this.date);
       commentContainer.appendChild(contentsParagraph);
-      commentContainer.appendChild(dateParagraph);
+      // commentContainer.appendChild(dateParagraph);
   
       return commentContainer;
     }
@@ -51,7 +52,7 @@ class Comment {
     const planName = urlParams.get("planName");
     if (planName) {
       const apiUrl = `http://localhost:8080/notes/${encodeURIComponent(planName)}`;
-      const commentRenderer = new CommentRender(apiUrl, ".ratingOnComment");
+      const commentRenderer = new CommentRender(apiUrl, ".commentContainer");
       commentRenderer.fetchAndRender();
     } else {
       console.error("planName parameter is missing in the URL.");

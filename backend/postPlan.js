@@ -1,8 +1,10 @@
 document.getElementById('submit-button').addEventListener('click', createNote);
 
 async function createNote() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const title = urlParams.get('planName');
+    // const urlParams = new URLSearchParams(window.location.search);
+    // const title = urlParams.get('planName');
+    const title=document.getElementsByClassName('invisible')[0].textContent;
+    console.log(title);
     const contentsInput = document.getElementById('contents');
     const contents = contentsInput.value;
 
