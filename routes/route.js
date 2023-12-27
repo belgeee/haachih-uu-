@@ -15,10 +15,49 @@ router.get('/index', (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../index.html'));
     } else {
-        const errorMessage = 'You most login to see this page';
+        const errorMessage = 'You must login to see this page';
         res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
     }
 });
+ 
+router.get("/menubar", (req, res)=>{
+    if (req.session.loggedin) {
+        res.sendFile(path.join(__dirname + '/../menubar.html'));
+    } else {
+        const errorMessage = 'You must login to see this page';
+        res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
+    }
+})
+
+router.get("/place", (req, res)=>{
+    if (req.session.loggedin) {
+        res.sendFile(path.join(__dirname + '/../place.html'));
+    } else {
+        const errorMessage = 'You must login to see this page';
+        res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
+    }
+})
+router.get("/letsgo", (req, res)=>{
+    if (req.session.loggedin) {
+        res.sendFile(path.join(__dirname + '/../letsgo.html'));
+    } else {
+        const errorMessage = 'You must login to see this page';
+        res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
+    }
+})
+
+
+
+router.get("/plan", (req, res)=>{
+    if (req.session.loggedin) {
+        res.sendFile(path.join(__dirname + '/../plan.html'));
+    } else {
+        const errorMessage = 'You must login to see this page';
+        res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
+    }
+})
+
+
 
 router.post('/auth', authController.authenticate);
 router.post('/authreg', authController.register);

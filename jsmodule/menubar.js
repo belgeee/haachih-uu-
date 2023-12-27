@@ -46,7 +46,7 @@ class Plan {
                     ${this.place4 ? `<li class="active">${this.place4}</li>` : '<li class="deactive"></li>'}
                     ${this.place5 ? `<li class="active">${this.place5}</li>` : '<li class="deactive"></li>'}
                 </ol>
-                <a href="./plan.html?planName=${this.title}&tag=${this.tag}" >
+                <a href="/plan?planName=${this.title}&tag=${this.tag}" >
                     <button class="value"><span>${this.buttonText}</span>-С эхэлнэ</button>
                 </a>
             </div>

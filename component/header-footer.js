@@ -5,15 +5,15 @@ class header extends HTMLElement {
     connectedCallback() {
         this.parentNode.innerHTML = `
         <nav>
-        <a href="index.html">
+        <a href="/index">
           <img class="logopng1" src="/logo.png" alt="haachihuu_logo"/>
         </a>
         <ul>
-          <li><a href="./menubar.html?tag=Орой яахын">Орой яахын?</a></li>
-          <li><a href="./menubar.html?tag=Төрсөн өдөр">Төрсөн өдөр гэсэн үү дээ?</a></li>
-          <li><a href="./menubar.html?tag=Арван жил">Арван жил шдээ</a></li>
-          <li><a href="./menubar.html?tag=">Валинтин гэсээн</a></li>
-          <li><a href="./menubar.html?tag=Хөдөө">Хөдөө гарья</a></li>
+          <li><a href="/menubar?tag=Орой яахын">Орой яахын?</a></li>
+          <li><a href="/menubar?tag=Төрсөн өдөр">Төрсөн өдөр гэсэн үү дээ?</a></li>
+          <li><a href="/menubar?tag=Арван жил">Арван жил шдээ</a></li>
+          <li><a href="/menubar">Валинтин гэсээн</a></li>
+          <li><a href="/menubar?tag=Хөдөө">Хөдөө гарья</a></li>
         </ul>
         <section class="headerButton">
         

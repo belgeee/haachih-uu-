@@ -287,7 +287,7 @@ meter{
               <address>
                 <i class="fa-solid fa-location-dot"></i>${plan.location}
               </address>
-              <a href="./plan.html?planName=${plan.title}&tag=${plan.tag}">
+              <a href="./plan?planName=${plan.title}&tag=${plan.tag}">
                 <button class="value"><span>${plan.buttonText}</span>-c эхэлье</button>
               </a>
               

@@ -32,8 +32,8 @@ html {
   
   .login-box .user-box input {
     width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
+    padding: 6px 0;
+    font-size: 14px;
     color: #fff;
     margin-bottom: 30px;
     border: none;
@@ -46,7 +46,7 @@ html {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 10px 0;
+    padding: 4px 0;
     font-size: 16px;
     color: #fff;
     pointer-events: none;
@@ -105,7 +105,7 @@ html {
     position: absolute;
     display: block;
   }
-  
+/*   
   .login-box button span:nth-child(1) {
     top: 0;
     left: -100%;
@@ -184,4 +184,4 @@ html {
       bottom: 100%;
     }
   }
-  
+   */

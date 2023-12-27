@@ -335,7 +335,7 @@ class PlaceList extends HTMLElement {
               <address>${place.address}</address> <!-- Change 'this.address' to 'place.address' -->
               <i class="far fa-clock"></i>
               <time>${place.hours}</time><br> <!-- Change 'this.hours' to 'place.hours' -->
-              <a href="./place.html"><button class="value" ><span>${place.buttonText}</span>К -с эхэлнэ</button></a>
+              <a href="/place"><button class="value" ><span>${place.buttonText}</span>К -с эхэлнэ</button></a>
               
           </div>
       </article>

@@ -21,6 +21,7 @@ app.use(express.static(__dirname + "/assets"));
 app.use(express.static(__dirname + "/component"));
 app.use(express.static(__dirname + "/zurag"));
 app.use(express.static(__dirname + "/jsmodule"));
+app.use(express.static(__dirname + "/backend"));
 app.use("/", routes);
 
 // db.query("SELECT 1")
