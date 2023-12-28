@@ -7,6 +7,7 @@ exports.authenticate = async (req, res) => {
             req.session.loggedin = true;
             req.session.username = username;
             res.redirect('/index');
+            return { success: true, username: req.session.username };
         } else {
             const errorMessage = 'Incorrect Username or Password';
             res.status(401).send(errorMessage);
@@ -39,7 +40,7 @@ exports.register = async (req, res) => {
 
 exports.logout = (req, res) => {
     if (req.session.loggedin) {
-        // Clear the session data indicating the user is logged in
+
         req.session.destroy((err) => {
             if (err) {
                 console.error(err);
@@ -53,3 +54,23 @@ exports.logout = (req, res) => {
         res.status(401).send(errorMessage);
     }
 };
+
+// exports.createNote = async (req, res) => {
+//     try {
+//         const username = req.session.username;
+//         const { title, contents } = req.body;
+//        if (!title || !contents) {
+//             return res.status(400).send("Title and contents are required");
+//         }
+//         const [result] = await db.query(
+//             "INSERT INTO notes (title, contents, username) VALUES (?, ?, ?)",
+//             [title, contents, username]
+//         );
+//         const id = result.insertId;
+//         const newNote = await db.query("SELECT * FROM notes WHERE id = ?", [id]);
+//         res.status(201).send(newNote[0]);
+//     } catch (error) {
+//         console.error("Error executing query:", error);
+//         res.status(500).send("Internal Server Error");
+//     }
+// };

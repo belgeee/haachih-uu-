@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const authController = require('../controller/controller'); 
+const { authenticateUser } = require('../controller/authMiddleware');
+const authController = require('../controller/controller');
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname + '/../login/login.html'));
@@ -13,14 +14,15 @@ router.get('/register', (req, res) => {
 
 router.get('/index', (req, res) => {
     if (req.session.loggedin) {
+        // res.render("index", { username: req.session.username });
         res.sendFile(path.join(__dirname + '/../index.html'));
     } else {
         const errorMessage = 'You must login to see this page';
         res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
     }
 });
- 
-router.get("/menubar", (req, res)=>{
+
+router.get("/menubar", (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../menubar.html'));
     } else {
@@ -29,7 +31,7 @@ router.get("/menubar", (req, res)=>{
     }
 })
 
-router.get("/place", (req, res)=>{
+router.get("/place", (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../place.html'));
     } else {
@@ -37,9 +39,17 @@ router.get("/place", (req, res)=>{
         res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
     }
 })
-router.get("/letsgo", (req, res)=>{
+router.get("/letsgo", (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../letsgo.html'));
+    } else {
+        const errorMessage = 'You must login to see this page';
+        res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
+    }
+})
+router.get("/like", (req, res) => {
+    if (req.session.loggedin) {
+        res.sendFile(path.join(__dirname + '/../like.html'));
     } else {
         const errorMessage = 'You must login to see this page';
         res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
@@ -48,7 +58,7 @@ router.get("/letsgo", (req, res)=>{
 
 
 
-router.get("/plan", (req, res)=>{
+router.get("/plan", (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../plan.html'));
     } else {
@@ -57,6 +67,20 @@ router.get("/plan", (req, res)=>{
     }
 })
 
+router.get('/some-protected-route', authenticateUser, (req, res) => {
+
+    console.log('Username:', req.username);
+    res.send('This is a protected route.');
+});
+
+router.get("/index", (req, res) => {
+
+    if (req.session.loggedin) {
+        res.render("index", { username: req.session.username });
+    } else {
+        res.redirect("/");
+    }
+});
 
 
 router.post('/auth', authController.authenticate);

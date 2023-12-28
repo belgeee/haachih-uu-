@@ -1,12 +1,21 @@
+
 document.getElementById('submit-button').addEventListener('click', createNote);
 
 async function createNote() {
     // const urlParams = new URLSearchParams(window.location.search);
     // const title = urlParams.get('planName');
-    const title=document.getElementsByClassName('invisible')[0].textContent;
-    console.log(title);
     const contentsInput = document.getElementById('contents');
     const contents = contentsInput.value;
+    console.log(contents);
+    // const username="random guy";
+    // console.log(username);
+    const title=document.getElementsByClassName('invisible')[0].textContent;
+    console.log(title);
+    
+    
+    
+    // const userId = req.session.username;
+    // console.log(userId);
 
     // Check if the 'contents' field is empty
     if (!contents) {
@@ -17,10 +26,11 @@ async function createNote() {
     const formData = {
         title: title,
         contents: contents,
+        // username: username,
     };
 
     try {
-        const apiUrl = 'http://localhost:8080/notes';
+        const apiUrl = 'http://localhost:9091/notes';
         console.log('API URL:', apiUrl);
 
         const response = await fetch(apiUrl, {

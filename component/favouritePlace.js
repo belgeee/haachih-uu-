@@ -1,4 +1,4 @@
-import {FavouritePlaceList} from '../jsmodule/fav-place-rend.js'
+import {FavouritePlaceList} from '/fav-place-rend.js'
 class FavouritePlaceListComponent extends HTMLElement {
     constructor() {
         super();

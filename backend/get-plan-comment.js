@@ -1,7 +1,8 @@
 class Comment {
     constructor(data) {
       this.contents = data.contents;
-      this.date = data.created;
+      this.date = data.created_at;
+      this.username=data.username;
     }
   
     render() {
@@ -10,14 +11,19 @@ class Comment {
   
       const contentsParagraph = document.createElement("p");
       contentsParagraph.textContent = this.contents;
-  
+
+      const userPhrapraph = document.createElement("p");
+      userPhrapraph.textContent = this.username;
+
       const dateParagraph = document.createElement("time");
       const shortenedDate = this.date.substring(0, 10); 
       dateParagraph.textContent = shortenedDate;
       
-      // dateParagraph.setAttribute("datetime", this.date);
+      dateParagraph.setAttribute("datetime", this.date);
+      
+      commentContainer.appendChild(userPhrapraph);
+      commentContainer.appendChild(dateParagraph);
       commentContainer.appendChild(contentsParagraph);
-      // commentContainer.appendChild(dateParagraph);
   
       return commentContainer;
     }
@@ -51,7 +57,7 @@ class Comment {
     const urlParams = new URLSearchParams(window.location.search);
     const planName = urlParams.get("planName");
     if (planName) {
-      const apiUrl = `http://localhost:8080/notes/${encodeURIComponent(planName)}`;
+      const apiUrl = `http://localhost:9091/notes/${encodeURIComponent(planName)}`;
       const commentRenderer = new CommentRender(apiUrl, ".commentContainer");
       commentRenderer.fetchAndRender();
     } else {

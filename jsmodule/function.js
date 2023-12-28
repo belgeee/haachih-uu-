@@ -1,21 +1,10 @@
-function getValueForFilter() {
-  // Get selected values
-  var huniiTooValue = document.getElementById('huniiToo').value;
-  var oirhonGazarValue = document.getElementById('oirhonGazar').value;
-  var typeValue = document.getElementById('type').value;
-
-  // Display selected values
-  var newUrl = "/letsgo" +  "?address=" + oirhonGazarValue + "&category=" + typeValue+"&countPeople=" + huniiTooValue;
-  window.location.href = newUrl;
-}
-  
 
 
 
 
 function changeColor() {
     var button = document.querySelector('.like');
-    
+
     if (button.style.color === 'red') {
         button.style.color = 'black';
     } else {
@@ -29,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (logoutButton) {
         logoutButton.addEventListener('click', function () {
-            // Ketika tombol "Logout" diklik, kirim permintaan POST ke /logout
+
             fetch('/logout', {
                 method: 'POST',
                 headers: {
@@ -39,10 +28,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Jika logout berhasil, arahkan ke halaman login atau halaman lain yang sesuai.
-                        window.location.href = '/'; // Ganti '/login' dengan URL halaman login yang sesuai.
+
+                        window.location.href = '/';
                     } else {
-                        // Jika logout gagal, tampilkan pesan kesalahan atau sesuaikan tindakan lain yang sesuai.
+
                         alert(data.message);
                     }
                 })
@@ -50,3 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+function getValueForFilter() {
+
+    var huniiTooValue = document.getElementById('huniiToo').value;
+    var oirhonGazarValue = document.getElementById('oirhonGazar').value;
+    var typeValue = document.getElementById('type').value;
+
+
+    var newUrl = "/letsgo" + "?address=" + oirhonGazarValue + "&category=" + typeValue + "&countPeople=" + huniiTooValue;
+    window.location.href = newUrl;
+
+}
+
+function sideFilter() {
+    var starValue = document.getElementById('star').value;
+    var detailValue = document.getElementById('detail').value;
+
+    var newUrl = "&star" + starValue + "&detail" + detailValue;
+    window.location.href = newUrl;
+}
+
