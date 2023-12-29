@@ -99,12 +99,14 @@ filterByTagName(){
     const themeClass = this.darkMode ? 'dark-theme' : 'light-theme';
     
     this.myRoot.innerHTML = `
-      <style>
-      <link
+    <link rel="stylesheet" href="/style.css">
+    <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-      <link rel="stylesheet" href="../css/style.css">
+      <style>
+      
+     
       @import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
  
       :root {
@@ -296,6 +298,12 @@ meter{
         </div>
       </section>
     `;
+
+    plans.forEach((plan, index) => {
+      const starsContainer = this.myRoot.querySelector(`.item .PlanInfo:nth-child(${index + 1}) .title .stars-container`);
+      const star = new PlanStars({ stars: plan.stars });
+      star.render(starsContainer);
+    });
   }
 }
 
