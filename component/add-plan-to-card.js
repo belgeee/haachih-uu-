@@ -6,6 +6,21 @@ class AddToCard extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 /* Add your styles here */
+                button.addToCard {
+                    background-color: #007BFF;
+                    color: #ffffff;
+                    border: none;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    border-radius: 5px;
+                }
+
+                button.addToCard:hover {
+                    background-color: #0056b3;
+                }
+                button{
+                    text-align: center;
+                }
             </style>
             <button class="addToCard">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512">

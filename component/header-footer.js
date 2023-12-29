@@ -3,6 +3,7 @@ class header extends HTMLElement {
             super();
     }
     connectedCallback() {
+      
         this.parentNode.innerHTML = `
         <nav>
         <a href="/index">
@@ -20,7 +21,6 @@ class header extends HTMLElement {
           <favourite-plan></favourite-plan>
           <favourite-place></favourite-place>
         </section>
-
         <button id="logoutButton">Logout</button>
       </nav>
             `;

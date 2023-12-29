@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const { authenticateUser } = require('../controller/authMiddleware');
 const authController = require('../controller/controller');
 
 router.get('/', (req, res) => {
@@ -67,20 +66,6 @@ router.get("/plan", (req, res) => {
     }
 })
 
-router.get('/some-protected-route', authenticateUser, (req, res) => {
-
-    console.log('Username:', req.username);
-    res.send('This is a protected route.');
-});
-
-router.get("/index", (req, res) => {
-
-    if (req.session.loggedin) {
-        res.render("index", { username: req.session.username });
-    } else {
-        res.redirect("/");
-    }
-});
 
 
 router.post('/auth', authController.authenticate);

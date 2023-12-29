@@ -100,7 +100,7 @@ app.post("/notes", async (req, res) => {
 app.get("/comment/:title", async (req, res) => {
   const title = req.params.title;
   try {
-    const [rows] = await db.query("SELECT * FROM stars WHERE title = ?", [title]);
+    const [rows] = await db.query("select title, AVG(stars) as stars from stars where title=? group by title", [title]);
     res.send(rows);
   } catch (error) {
     console.error("Error executing query:", error);
@@ -123,7 +123,7 @@ app.post("/comment", async (req, res) => {
       [title, stars, username]
     );
     const id = result.insertId;
-    const newNote = await db.query("SELECT * FROM notes WHERE id = ?", [id]);
+    const newNote = await db.query("SELECT * FROM stars WHERE id = ?", [id]);
     res.status(201).send(newNote[0]);
   } catch (error) {
     console.error("Error executing query:", error);

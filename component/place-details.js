@@ -1,4 +1,4 @@
-import "../jsmodule/place-details-rend.js";
+import "/place-details-rend.js";
  
 class Place extends HTMLElement {
   constructor() {
@@ -63,7 +63,7 @@ class Place extends HTMLElement {
       sessionStorage.setItem("mic", this.mic);
       sessionStorage.setItem("spkr", this.spkr);
  
-      window.location.href = "place.html";
+      window.location.href = "/place";
     });
   }
 }

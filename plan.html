@@ -20,6 +20,7 @@
     <script type="module" src="/favouritePlan.js"></script>
     <script type="module" src="/add-place-to-card.js"></script>
     <script type="module" src="/add-plan-to-card.js"></script>
+    <script src="/get-plan-star.js"></script>
     <script src="/indexPlan.js"></script>
     <script src="/post-plan-star.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -48,15 +49,19 @@
                 </div>
                 <div class="myRating">
                   <input type="radio" id="star5" name="rating" value="5" />
-                  <label  for="star5"><i class="fa-solid fa-star"></i></label>
-                  <input  type="radio" id="star4" name="rating" value="4" />
-                  <label   for="star4"><i class="fa-solid fa-star"></i></label>
-                  <input  type="radio" id="star3" name="rating" value="3" />
-                  <label  for="star3"><i class="fa-solid fa-star"></i></label>
-                  <input  type="radio" id="star2" name="rating" value="2" />
-                  <label for="star2"><i class="fa-solid fa-star"></i></label>
-                  <input  type="radio" id="star1" name="rating" value="1" />
-                  <label for="star1"><i class="fa-solid fa-star"></i></label>
+                  <label for="star5" onclick="printRatingValue('5')"><i class="fa-solid fa-star"></i></label>
+                  
+                  <input type="radio" id="star4" name="rating" value="4" />
+                  <label for="star4" onclick="printRatingValue('4')"><i class="fa-solid fa-star"></i></label>
+                  
+                  <input type="radio" id="star3" name="rating" value="3" />
+                  <label for="star3" onclick="printRatingValue('3')"><i class="fa-solid fa-star"></i></label>
+                  
+                  <input type="radio" id="star2" name="rating" value="2" />
+                  <label for="star2" onclick="printRatingValue('2')"><i class="fa-solid fa-star"></i></label>
+                  
+                  <input type="radio" id="star1" name="rating" value="1" />
+                  <label for="star1" onclick="printRatingValue('1')"><i class="fa-solid fa-star"></i></label>
                 </div>
                 <section class="ratingOnComment">
                   <h4>Сэтгэгдэл</h4>
@@ -79,26 +84,7 @@
                   </div>
                 </section>
               </article>
-                <section class="rateAction>">
-                    <template id="star-rating-template">
-                        <form>
-                       <fieldset>
-                         <slot name="star-rating-legend"><legend>Rate your experience:</legend></slot>
-                          <rating>
-                            <input type="radio" name="rating" value="1" aria-label="1 star" required/>
-                            <input type="radio" name="rating" value="2" aria-label="2 stars"/>
-                            <input type="radio" name="rating" value="3" aria-label="3 stars"/>
-                            <input type="radio" name="rating" value="4" aria-label="4 stars"/>
-                            <input type="radio" name="rating" value="5" aria-label="5 stars"/>
-                          </rating>
-                         </fieldset>
-                          <button type="reset">Reset</button>
-                          <button type="submit">Submit</button>
-                     </form>
-                     
-                     </template>
-                     
-                </section>
+                
             </aside>
  
         
