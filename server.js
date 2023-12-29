@@ -148,9 +148,7 @@ connectToDatabase();
 
 app.use((req, res, next) => {
   if (req.session.username || config.local === true) {
-    console.log(req.session.username);
    next();
-   console.log("GL")
   } else {
    res.redirect('/');
   }

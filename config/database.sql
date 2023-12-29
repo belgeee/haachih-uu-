@@ -1,3 +1,5 @@
+-- database bolon table aa tohiruulah
+
 use notes_app;
 select * from notes;
 delete from notes where id!=56; 
@@ -28,3 +30,16 @@ INSERT INTO users (username, password) VALUES
 ('user1', 'password1'),
 ('user2', 'password2'),
 ('user3', 'password3');
+delete from users where id!=1;
+
+select * from stars;
+
+CREATE TABLE stars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    stars float,
+    username VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO stars (title, stars, username) VALUES ('Example Title', 4.5, 'john_doe');
