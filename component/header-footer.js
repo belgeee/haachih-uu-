@@ -20,7 +20,7 @@ class header extends HTMLElement {
           <favourite-plan></favourite-plan>
           <favourite-place></favourite-place>
         </section>
-        <span>Welcome, <%= username %></span>
+
         <button id="logoutButton">Logout</button>
       </nav>
             `;

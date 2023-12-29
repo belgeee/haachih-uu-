@@ -55,7 +55,7 @@ class FavouritePlaceListComponent extends HTMLElement {
             }
         } else {
             if (placesContainer) {
-                placesContainer.innerHTML = `<h2 class="baihgui">Here is nothing.</h2>`;
+                placesContainer.innerHTML = `<h2 class="baihgui">Зүрхэндээ газар нэмээрэй</h2>`;
             }
         }
     }

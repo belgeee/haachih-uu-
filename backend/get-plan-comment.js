@@ -22,8 +22,8 @@ class Comment {
       dateParagraph.setAttribute("datetime", this.date);
       
       commentContainer.appendChild(userPhrapraph);
-      commentContainer.appendChild(dateParagraph);
       commentContainer.appendChild(contentsParagraph);
+      commentContainer.appendChild(dateParagraph);
   
       return commentContainer;
     }
@@ -57,7 +57,7 @@ class Comment {
     const urlParams = new URLSearchParams(window.location.search);
     const planName = urlParams.get("planName");
     if (planName) {
-      const apiUrl = `http://localhost:9091/notes/${encodeURIComponent(planName)}`;
+      const apiUrl = `http://localhost:3000/notes/${encodeURIComponent(planName)}`;
       const commentRenderer = new CommentRender(apiUrl, ".commentContainer");
       commentRenderer.fetchAndRender();
     } else {

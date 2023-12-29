@@ -7,7 +7,7 @@ const db = require("./config/database.js");
 const routes = require("./routes/route.js");
 
 const app = express();
-const PORT = 9091;
+const PORT = 3000;
 
 app.use(cors());
 app.use(
@@ -93,6 +93,49 @@ app.post("/notes", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
+
+
+app.get("/comment/:title", async (req, res) => {
+  const title = req.params.title;
+  try {
+    const [rows] = await db.query("SELECT * FROM stars WHERE title = ?", [title]);
+    res.send(rows);
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+app.post("/comment", async (req, res) => {
+  const { title, stars} = req.body;
+  const username=req.session.username;
+  if (!title || !stars || !username) {
+    return res.status(400).send("Title and contents are required");
+  }
+
+  try {
+    const [result] = await db.query(
+      "INSERT INTO stars (title, stars, username) VALUES (?, ?, ?)",
+      [title, stars, username]
+    );
+    const id = result.insertId;
+    const newNote = await db.query("SELECT * FROM notes WHERE id = ?", [id]);
+    res.status(201).send(newNote[0]);
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+
+
+
+
+
 
 
 

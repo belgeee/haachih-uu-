@@ -30,7 +30,7 @@ async function createNote() {
     };
 
     try {
-        const apiUrl = 'http://localhost:9091/notes';
+        const apiUrl = 'http://localhost:3000/notes';
         console.log('API URL:', apiUrl);
 
         const response = await fetch(apiUrl, {

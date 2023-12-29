@@ -344,9 +344,6 @@ class PlaceList extends HTMLElement {
     `;
   }
 
-  handleAddToCart(place) { 
-    this.dispatchEvent(new CustomEvent('add-to-cart', { detail: { place } }));
-  }
 }
 
 customElements.define('place-list', PlaceList); 
