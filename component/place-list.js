@@ -9,8 +9,9 @@ class PlaceList extends HTMLElement {
   connectedCallback() {
     const topPlace=this.getAttribute('topplace')
     const Styletype=this.getAttribute('style')
+    const isSort=this.getAttribute("sort");
     const topCount = parseInt(topPlace);
-    this.fetchPlaces(topCount, Styletype); 
+    this.fetchPlaces(topCount, Styletype, isSort); 
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -19,7 +20,7 @@ class PlaceList extends HTMLElement {
     }
   }
 
-  async fetchPlaces(topCount, Styletype) { 
+  async fetchPlaces(topCount, Styletype, isSort) { 
     try {
       const response = await fetch(`https://api.jsonbin.io/v3/b/658bcbe8dc746540188951e3`);
 
@@ -31,19 +32,27 @@ class PlaceList extends HTMLElement {
 
       const data = await response.json();
       this.places = data.record || [];
+      if(isSort=="yes"){
+        this.sortAndSlicePlaces(4);
+      }
+
       this.render(topCount, Styletype);
     } catch (error) {
       console.error('Error fetching places:', error); 
     }
   }
 
+  sortAndSlicePlaces(topCount) {
+    this.places.sort((a, b) => b.stars - a.stars);
+    this.places = this.places.slice(1, topCount);
+    }
+
   render(topCount, Styletype) {
     const places = this.places.slice(0, topCount) || [];
     let styleTemplate = ''; 
     if (Styletype == 'gridhiineshuu') {
       styleTemplate = `
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-  <link rel="stylesheet" href="../css/general.css">
+  
   <style>
     h2 {
       margin: 3rem;
@@ -193,7 +202,10 @@ class PlaceList extends HTMLElement {
         font-size: 0.8rem;
       }
     }
-  </style>`;
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/general.css">
+  `;
     } else  {
       styleTemplate = `
         <style>
@@ -316,7 +328,10 @@ class PlaceList extends HTMLElement {
       meter{
           height: 1.8rem;
       }
-        </style>`;
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <link rel="stylesheet" href="../css/general.css">
+        `;
     }
     this.shadowRoot.innerHTML = `
     ${styleTemplate}

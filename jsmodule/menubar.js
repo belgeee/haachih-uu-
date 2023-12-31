@@ -74,6 +74,8 @@ class PlanRenderer {
     async fetchAndRenderPlaces(targetSelector) {
         try {
             const response = await fetch(this._apiUrl);
+
+            
     
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -83,6 +85,9 @@ class PlanRenderer {
     
             if (data && Array.isArray(data.record)) {
                 this._plansList = this.filterPlacesByTag(data.record);
+
+                // Fetch the second API
+                
                 console.log("JSON length:", this._plansList.length);
                 // if(this._plansList.length>6){
                 //     var button = document.createElement('button');

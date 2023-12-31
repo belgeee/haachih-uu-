@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const cors = require("cors");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const db = require("./config/database.js");
@@ -8,8 +7,6 @@ const routes = require("./routes/route.js");
 
 const app = express();
 const PORT = 3000;
-
-app.use(cors());
 app.use(
   session({
     secret: "secret",
@@ -54,8 +51,9 @@ const swaggerOptions = {
       description: "API for managing notes",
     },
   },
-  apis: ["backend/express.js"],
+  apis: ["server.js"],
 };
+
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
@@ -95,8 +93,104 @@ app.post("/notes", async (req, res) => {
 });
 
 
+/**
+ * @swagger
+ * /notes/{title}:
+ *   get:
+ *     summary: Get a note by title
+ *     description: Retrieve a note based on its title.
+ *     tags:
+ *       - Notes
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: The title of the note to retrieve.
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               title: "Example Note"
+ *               contents: "This is an example note."
+ */
 
+/**
+ * @swagger
+ * /comment/{title}:
+ *   get:
+ *     summary: Get a note by title
+ *     description: Retrieve a note based on its title.
+ *     tags:
+ *       - Notes
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: The title of the note to retrieve.
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               title: "Example Note"
+ *               contents: "This is an example note."
+ */
+/**
+ * @swagger
+ * /stars:
+ *   get:
+ *     summary: Get a note by title
+ *     description: Retrieve a note based on its title.
+ *     tags:
+ *       - Notes
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: The title of the note to retrieve.
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               title: "Example Note"
+ *               contents: "This is an example note."
+ */
 
+/**
+ * @swagger
+ * /comment:
+ *   post:
+ *     summary: post a note by title
+ *     description: Retrieve a note based on its title.
+ *     tags:
+ *       - Notes
+ *     parameters:
+ *       - name: title
+ *         in: path
+ *         description: The title of the note to retrieve.
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ */
 app.get("/comment/:title", async (req, res) => {
   const title = req.params.title;
   try {
@@ -107,6 +201,19 @@ app.get("/comment/:title", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
+app.get("/stars", async (req, res) => {
+  const title = req.params.title;
+  try {
+    const [rows] = await db.query("select title, AVG(stars) as stars from stars  group by title");
+    res.send(rows);
+  } catch (error) {
+    console.error("Error executing query:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 
 
 
@@ -136,22 +243,11 @@ app.post("/comment", async (req, res) => {
 
 
 
-
-
-
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke 💩");
 });
 
 connectToDatabase();
-
-app.use((req, res, next) => {
-  if (req.session.username || config.local === true) {
-   next();
-  } else {
-   res.redirect('/');
-  }
-});
 
 

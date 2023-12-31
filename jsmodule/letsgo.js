@@ -20,7 +20,7 @@ class Place {
  
     render() {
       const article = document.createElement('article');
-      article.classList.add('item');
+      article.classList.add('subNewPlace');
       article.innerHTML = `
           <img src="/sura.jpg" alt="${this.name}" />
           <div class="information">

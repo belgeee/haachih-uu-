@@ -38,6 +38,7 @@ router.get("/place", (req, res) => {
         res.send(`<script>alert('${errorMessage}'); window.location.href='/';</script>`);
     }
 })
+
 router.get("/letsgo", (req, res) => {
     if (req.session.loggedin) {
         res.sendFile(path.join(__dirname + '/../letsgo.html'));

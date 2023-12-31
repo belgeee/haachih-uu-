@@ -8,8 +8,7 @@ CREATE TABLE stars (
     stars INT,
     date DATE DEFAULT current_timestamp
 );
-drop table notes;
-select * from stars;
+
 CREATE TABLE users (
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL,
@@ -23,15 +22,17 @@ CREATE TABLE notes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-select * from users;
+
+
+INSERT INTO stars (title, stars, username) VALUES ('Example Title', 4.5, 'john_doe');
+
 INSERT INTO users (username, password) VALUES
 ('user1', 'password1'),
 ('user2', 'password2'),
 ('user3', 'password3');
 delete from users where id!=1;
 
-select * from stars;
-select title, AVG(stars) as stars from stars group by title ;
+
 CREATE TABLE stars (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -40,4 +41,10 @@ CREATE TABLE stars (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO stars (title, stars, username) VALUES ('Example Title', 4.5, 'john_doe');
+
+
+drop table notes;
+select * from stars;
+select * from stars;
+select title, AVG(stars) as stars from stars group by title ;
+select * from users;
