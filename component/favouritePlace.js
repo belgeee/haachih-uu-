@@ -23,9 +23,11 @@ class FavouritePlaceListComponent extends HTMLElement {
             this.listJSON.push(myProduct);
             localStorage.setItem("lists", JSON.stringify(this.listJSON));
             this.favPlaceNum++;
-            window.alert("Successfully added " + this.favPlaceNum + " place to your favorites.");
+            window.alert("Successfully added " + this.favPlaceNum + " place in your favorites");
+            const count = document.querySelector("favourite-count");
+            count.update();
         } else {
-            window.alert(`You already added "${myProduct.title}" to your favorites.`);
+            window.alert(`You already added "${myProduct.title}" in your favorites.`);
         }
         this.render_count();
     }

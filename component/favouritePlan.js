@@ -25,9 +25,11 @@ export class FavouriteListComponent extends HTMLElement {
             localStorage.setItem("listsPlan", JSON.stringify(this.listPlanJSON));
             this.favPlanNum++;
             console.log(this.listPlanJSON);
-            window.alert(`Successfully added "${myProductPlan.title}" to your plans. Total: ${this.favPlanNum} plans`);
+            window.alert(`Successfully added "${myProductPlan.title}" in your favorites`);
+            const count = document.querySelector("favourite-count");
+            count.update();
         } else {
-            window.alert(`You already added "${myProductPlan.title}" to your favorites.`);
+            window.alert(`You already added "${myProductPlan.title}" in your favorites`);
         }
         this.render_count();
     }

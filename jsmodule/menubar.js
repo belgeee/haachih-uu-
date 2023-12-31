@@ -66,6 +66,7 @@ class Plan {
 class PlanRenderer {
     constructor(apiUrl, tagFilter) {
         this._plansList = [];
+        this.anotherList=[];
         this._apiUrl = apiUrl;
         this._tagFilter = tagFilter;
         this.jsonLength=[];
@@ -82,26 +83,14 @@ class PlanRenderer {
             }
     
             const data = await response.json();
-    
+            // updateStar()
             if (data && Array.isArray(data.record)) {
                 this._plansList = this.filterPlacesByTag(data.record);
 
                 // Fetch the second API
                 
                 console.log("JSON length:", this._plansList.length);
-                // if(this._plansList.length>6){
-                //     var button = document.createElement('button');
-
-                //     // Set button properties
-                //     button.innerHTML = 'See All'; // Button text
-                //     button.id = 'myButton'; // Button ID for reference
-
-                //     // Add a click event listener to the button
-                //     button.addEventListener('click', function() {
-                //     alert('Button clicked!');
-                //     });
-                //     document.getElementsByClassName('Bugd').appendChild(button);
-                // }
+                // updateStar('localhost:3000/stars');
                 this.renderPlans(targetSelector);
             } else {
                 console.error('Error: Expected an array of records in the response');
@@ -110,6 +99,13 @@ class PlanRenderer {
             console.error('Error fetching or parsing data:', error.message);
         }
     }
+    // async updateStar(){
+    //     apiUrl1="localhost:3000/stars";
+    //     const data1 = await fetch(apiUrl1);
+    //     const data2=await data1.json();
+    //     this.anotherList=data2.record;
+    //     console.log(this.anotherList);
+    // }
 
     filterPlacesByTag(placesData) {
         if (!this._tagFilter) {

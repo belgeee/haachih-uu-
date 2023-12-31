@@ -58,8 +58,8 @@
             const places = document.querySelector("favourite-place");
             const plans=document.querySelector('favourite-plan');
             const count = document.querySelector("favourite-count");
-            count.calculate();
-            count.render();
+            const real = count.querySelector("span");
+            real.textContent = '0';
             plans.jsonToCard();
             places.jsonToCard();
             plans.render_count();

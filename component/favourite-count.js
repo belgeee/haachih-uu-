@@ -22,16 +22,15 @@ class FavouriteCount extends HTMLElement {
         let numberValue2 = 0;
 
         if (FavouritePlace) {
-            const countElement = FavouritePlace.querySelector('.countPlace span');
-            if (countElement) {
-                numberValue = parseInt(countElement.textContent, 10);
+            const favPlaceComponent = FavouritePlace.favPlaceCount;
+            if (favPlaceComponent) {
+                numberValue = favPlaceComponent;
             }
         }
-
         if (FavouritePlan) {
-            const countElement2 = FavouritePlan.querySelector('.count span');
-            if (countElement2) {
-                numberValue2 = parseInt(countElement2.textContent, 10);
+            const favPlanComponent = FavouritePlan.favPlanCount;
+            if (favPlanComponent) {
+                numberValue2 = favPlanComponent;
             }
         }
 
