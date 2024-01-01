@@ -190,6 +190,10 @@ app.post("/notes", async (req, res) => {
  *         description: Successful response
  *         content:
  *           application/json:
+ *             example:
+ *               id: 1
+ *               title: "Example Note"
+ *               contents: "This is an example note."
  */
 app.get("/comment/:title", async (req, res) => {
   const title = req.params.title;

@@ -4,7 +4,7 @@ class searchPlace extends HTMLElement {
     }
    
     connectedCallback() {
-      this.parentNode.innerHTML = `
+      this.innerHTML = `
           <style>
           .option {
             border-radius: 1rem ;

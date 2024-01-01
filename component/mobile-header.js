@@ -5,7 +5,7 @@ class MobileHeader extends HTMLElement {
       super();
       this.attachShadow({ mode: "open" });
       this.shadowRoot.innerHTML = `
-      <link rel="stylesheet" href="../css/general.css">
+      <link rel="stylesheet" href="/general.css">
       <style>
       header {
           width: 100%;
@@ -132,7 +132,7 @@ class MobileHeader extends HTMLElement {
               </ul>
               </div>
               <span style="font-size: 30px; cursor: pointer; color: #fff" onclick="openNav()">&#9776;</span>
-              <a href="index.html">
+              <a href="/index">
               <img class="logopng1" src="/logo.png" alt="haachihuu_logo" />
               </a>
               <div class="users">
