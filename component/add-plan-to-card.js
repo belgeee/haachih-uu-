@@ -4,13 +4,9 @@ class AddToCard extends HTMLElement {
         // Attach the styles directly to the shadow DOM
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.innerHTML = `
+        <link rel="stylesheet" href="/general.css">
+        <link rel="stylesheet" href="/style.css">
             <style>
-                /* Add your styles here */
-            
-
-                button.addToCard:hover {
-                    background-color: #0056b3;
-                }
             </style>
             <button class="addToCard">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1.3em" viewBox="0 0 512 512">

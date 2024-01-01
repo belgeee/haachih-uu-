@@ -11,6 +11,7 @@ if you want run my project on your device. dont forget to configure your mysql w
  my first fullstack completely finished website. This is includes a lot of yb tutorial, especially india guy's guide. thank you
 
 # node server
+# localhost:3000
 
 
 # git add "yourfile"

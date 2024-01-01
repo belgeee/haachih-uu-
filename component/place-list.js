@@ -136,6 +136,13 @@ class PlaceList extends HTMLElement {
     }
 
     @media (max-width: 1400px) {
+
+
+      .subRecommend{
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 1rem;
+      }
       .subNewPlaces img {
         height: 100%;
         width: auto;
@@ -148,8 +155,10 @@ class PlaceList extends HTMLElement {
 
       .subNewPlaces {
         display: flex;
-        max-width: 100%;
-        max-height: 1rem;
+        max-width: 20rem;
+        height:auto;
+        border-radius: 2rem;
+        overflow: hidden;
       }
 
       .subNewPlaces .image {
@@ -328,9 +337,29 @@ class PlaceList extends HTMLElement {
       meter{
           height: 1.8rem;
       }
+
+      @media (max-width: 1300px) {
+        h2,  h3, .subNewPlaces h3 {
+          font-size: 1.5rem;
+        }
+  
+         p, .subNewPlaces p,
+         address, .subNewPlaces address,
+         time, .subNewPlaces time {
+          font-size: 0.9rem;
+        }
+  
+         .value, .subNewPlaces .value {
+          font-size: 0.9rem;
+          padding: 0.5rem;
+        }
+  
+         .value {
+          font-size: 0.8rem;
+        }
         </style>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-  <link rel="stylesheet" href="../css/general.css">
+       <link rel="stylesheet" href="/general.css">
         `;
     }
     this.shadowRoot.innerHTML = `
