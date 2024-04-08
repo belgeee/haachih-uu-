@@ -1,12 +1,29 @@
 const express = require("express");
 const session = require("express-session");
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-const db = require("./config/database.js");
-const routes = require("./routes/route.js");
+const firebase = require("firebase-admin");
+const serviceAccount = require("./config/database.json");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDQi2ZHifcmKsJ-SH8ob9u4eSqiLmbLSF0",
+  authDomain: "testhaachihuu.firebaseapp.com",
+  databaseURL: "https://testhaachihuu-default-rtdb.firebaseio.com",
+  projectId: "testhaachihuu",
+  storageBucket: "testhaachihuu.appspot.com",
+  messagingSenderId: "657750028304",
+  appId: "1:657750028304:web:90e15be08c59551c531a95",
+  measurementId: "G-8GYK754DDL"
+};
 
 const app = express();
 const PORT = 3000;
+
+// Initialize Firebase Admin SDK
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://testhaachihuu-default-rtdb.firebaseio.com/"
+});
+
+// Middleware for handling sessions
 app.use(
   session({
     secret: "secret",
@@ -18,240 +35,74 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use(express.static(__dirname + "/css"));
-app.use(express.static(__dirname + "/component"));
-app.use(express.static(__dirname + "/zurag"));
-app.use(express.static(__dirname + "/jsmodule"));
-app.use(express.static(__dirname + "/backend"));
-
-
-app.use("/", routes);
-
-
-const connectToDatabase = async () => {
-  try {
-    await db.query("SELECT 1");
-    console.log("Database is connected");
-    app.listen(PORT, () => {
-      console.log(`Server is running on http://localhost:${PORT}`);
-    });
-  } catch (err) {
-    console.error("Can't connect to the database" + "\n" + err.message);
-  }
-};
-
-
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Notes App API",
-      version: "1.0.0",
-      description: "API for managing notes",
-    },
-  },
-  apis: ["server.js"],
-};
-
-
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
+app.use(express.static(__dirname + "/public"));
 
 app.get("/notes/:title", async (req, res) => {
   const title = req.params.title;
   try {
-    const [rows] = await db.query("SELECT * FROM notes WHERE title = ?", [title]);
-    res.send(rows);
+    const doc = await firebase.firestore().collection("notes").doc(title).get();
+    if (!doc.exists) {
+      res.status(404).send("Note not found");
+      return;
+    }
+    res.send(doc.data());
   } catch (error) {
-    console.error("Error executing query:", error);
+    console.error("Error fetching note:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
 app.post("/notes", async (req, res) => {
-  const { title, contents} = req.body;
-  const username=req.session.username;
-  if (!title || !contents || !username) {
-    return res.status(400).send("Title and contents are required");
+  const { title, contents } = req.body;
+  if (!title || !contents) {
+    res.status(400).send("Title and contents are required");
+    return;
   }
 
   try {
-    const [result] = await db.query(
-      "INSERT INTO notes (title, contents, username) VALUES (?, ?, ?)",
-      [title, contents, username]
-    );
-    const id = result.insertId;
-    const newNote = await db.query("SELECT * FROM notes WHERE id = ?", [id]);
-    res.status(201).send(newNote[0]);
+    await firebase.firestore().collection("notes").doc(title).set({ contents });
+    res.status(201).send("Note created successfully");
   } catch (error) {
-    console.error("Error executing query:", error);
+    console.error("Error creating note:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-
-/**
- * @swagger
- * /notes/{title}:
- *   get:
- *     summary: Get a note by title
- *     description: Retrieve a note based on its title.
- *     tags:
- *       - Notes
- *     parameters:
- *       - name: title
- *         in: path
- *         description: The title of the note to retrieve.
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               title: "Example Note"
- *               contents: "This is an example note."
- */
-
-/**
- * @swagger
- * /comment/{title}:
- *   get:
- *     summary: Get a note by title
- *     description: Retrieve a note based on its title.
- *     tags:
- *       - Notes
- *     parameters:
- *       - name: title
- *         in: path
- *         description: The title of the note to retrieve.
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               title: "Example Note"
- *               contents: "This is an example note."
- */
-/**
- * @swagger
- * /stars:
- *   get:
- *     summary: Get a note by title
- *     description: Retrieve a note based on its title.
- *     tags:
- *       - Notes
- *     parameters:
- *       - name: title
- *         in: path
- *         description: The title of the note to retrieve.
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               title: "Example Note"
- *               contents: "This is an example note."
- */
-
-/**
- * @swagger
- * /comment:
- *   post:
- *     summary: post a note by title
- *     description: Retrieve a note based on its title.
- *     tags:
- *       - Notes
- *     parameters:
- *       - name: title
- *         in: path
- *         description: The title of the note to retrieve.
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Successful response
- *         content:
- *           application/json:
- *             example:
- *               id: 1
- *               title: "Example Note"
- *               contents: "This is an example note."
- */
-app.get("/comment/:title", async (req, res) => {
+app.get("/comments/:title", async (req, res) => {
   const title = req.params.title;
   try {
-    const [rows] = await db.query("select title, AVG(stars) as stars from stars where title=? group by title", [title]);
-    res.send(rows);
+    const snapshot = await firebase.firestore().collection("comments").where("title", "==", title).get();
+    const comments = snapshot.docs.map(doc => doc.data());
+    res.send(comments);
   } catch (error) {
-    console.error("Error executing query:", error);
+    console.error("Error fetching comments:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-
-app.get("/stars", async (req, res) => {
-  const title = req.params.title;
-  try {
-    const [rows] = await db.query("select title, AVG(stars) as stars from stars  group by title");
-    res.send(rows);
-  } catch (error) {
-    console.error("Error executing query:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-
-
-
-app.post("/comment", async (req, res) => {
-  const { title, stars} = req.body;
-  const username=req.session.username;
-  if (!title || !stars || !username) {
-    return res.status(400).send("Title and contents are required");
+app.post("/comments", async (req, res) => {
+  const { title, comment } = req.body;
+  if (!title || !comment) {
+    res.status(400).send("Title and comment are required");
+    return;
   }
 
   try {
-    const [result] = await db.query(
-      "INSERT INTO stars (title, stars, username) VALUES (?, ?, ?)",
-      [title, stars, username]
-    );
-    const id = result.insertId;
-    const newNote = await db.query("SELECT * FROM stars WHERE id = ?", [id]);
-    res.status(201).send(newNote[0]);
+    await firebase.firestore().collection("comments").add({ title, comment });
+    res.status(201).send("Comment added successfully");
   } catch (error) {
-    console.error("Error executing query:", error);
+    console.error("Error adding comment:", error);
     res.status(500).send("Internal Server Error");
   }
 });
 
-
-
-
-
-
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke 💩");
 });
 
-connectToDatabase();
-
-
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
