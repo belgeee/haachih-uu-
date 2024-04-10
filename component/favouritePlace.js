@@ -31,7 +31,6 @@ class FavouritePlaceListComponent extends HTMLElement {
         }
         this.render_count();
     }
-
     jsonToCard() {
         const placesContainer = document.querySelector(".places");
 
@@ -61,9 +60,11 @@ class FavouritePlaceListComponent extends HTMLElement {
         this.jsonToCard();
     }
 
+    
     get favPlaceCount() {
         return this.favPlaceNum;
     }
+    
 }
 
 window.customElements.define("favourite-place", FavouritePlaceListComponent);

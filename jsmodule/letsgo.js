@@ -95,10 +95,14 @@ class PlaceRenderer {
     return placesData.filter(place => {
         const huniiTooMatch = !this._huniiTooFilter || place.countPeople >= parseInt(this._huniiTooFilter, 10);
         const oirhonGazarMatch = !this._oirhonGazarFilter || place.address.includes(this._oirhonGazarFilter);
-        const typeMatch = !this._typeFilter || place.category.toLowerCase() === this._typeFilter.toLowerCase();
+        const typeMatch = !this._typeFilter || place.category.toLowerCase() == this._typeFilter.toLowerCase();
         return huniiTooMatch && oirhonGazarMatch && typeMatch;
     });
 }
+
+
+
+
 filterBySide(firstPlaceList){
     if (!this._starFilter && !this._detailFilter){
         return firstPlaceList;
@@ -129,7 +133,7 @@ filterBySide(firstPlaceList){
 }
  
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = "https://api.jsonbin.io/v3/b/658bcbe8dc746540188951e3";
+    const apiUrl = "https://api.jsonbin.io/v3/b/65925eb5266cfc3fde710003";
     const urlParams = new URLSearchParams(window.location.search);
     const tagFilter = urlParams.get('tag');
     const huniiTooFilter = urlParams.get('countPeople');

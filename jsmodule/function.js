@@ -1,18 +1,5 @@
 
 
-
-
-function changeColor() {
-    var button = document.querySelector('.like');
-
-    if (button.style.color === 'red') {
-        button.style.color = 'black';
-    } else {
-        button.style.color = 'red';
-    }
-}
-
-
 document.addEventListener('DOMContentLoaded', function () {
     const logoutButton = document.getElementById('logoutButton');
 
@@ -72,5 +59,20 @@ function getValueForFilter() {
       var newUrl = "/letsgo" + "?star=" + starValues.join(',') + "&detail=" + detailValues.join(',');
       window.location.href = newUrl;
     }
+
+
+    customElements.define(
+        "element-details",
+        class extends HTMLElement {
+          constructor() {
+            super();
+            const template = document.getElementById(
+              "element-details-template",
+            ).content;
+            const shadowRoot = this.attachShadow({ mode: "open" });
+            shadowRoot.appendChild(template.cloneNode(true));
+          }
+        },
+      );
    
    

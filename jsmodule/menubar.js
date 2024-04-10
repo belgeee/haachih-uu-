@@ -52,37 +52,38 @@ class Plan {
             </div>
         `;
 
-        const addToCardButton = article.querySelector('.add-to-card');
-
-        addToCardButton.addEventListener('click', () => {
-            // Handle the add-to-card functionality here
-            console.log(`Adding plan with ID ${this.id} to the card`);
-        });
-
         return article;
     }
 }
 
 class PlanRenderer {
-    constructor(apiUrl, tagFilter) {
+    constructor(apiUrl, tagFilter, apiUrl2) {
         this._plansList = [];
         this.anotherList=[];
         this._apiUrl = apiUrl;
         this._tagFilter = tagFilter;
         this.jsonLength=[];
+        this._apiUrl2=apiUrl2;
     }
 
     async fetchAndRenderPlaces(targetSelector) {
         try {
             const response = await fetch(this._apiUrl);
-
-            
-    
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
+            const response1=await fetch(this._apiUrl2)
             const data = await response.json();
+            const data1= await response1.json();
+            console.log(data.record);
+            console.log(data1)
+            
+            for (let i = 0; i < data.record.length; i++) {
+                for (let j = 0; j < data1.length; j++) {
+                    console.log("Comparing:", data1[j].title, data.record[i].data);
+    
+                    if (data1[j].title == data.record[i].data) {
+                        console.log("Match found: bataa");
+                    }
+                }
+            }
             // updateStar()
             if (data && Array.isArray(data.record)) {
                 this._plansList = this.filterPlacesByTag(data.record);
@@ -99,13 +100,16 @@ class PlanRenderer {
             console.error('Error fetching or parsing data:', error.message);
         }
     }
-    // async updateStar(){
-    //     apiUrl1="localhost:3000/stars";
-    //     const data1 = await fetch(apiUrl1);
-    //     const data2=await data1.json();
-    //     this.anotherList=data2.record;
-    //     console.log(this.anotherList);
-    // }
+
+    async fetchUpdateStar(apiUrl2){
+        try{
+            const response =await fetch(apiUrl2)
+            const data=await response.json();
+            console.log(data);
+        }catch{
+            
+        }
+    }
 
     filterPlacesByTag(placesData) {
         if (!this._tagFilter) {
@@ -125,12 +129,14 @@ class PlanRenderer {
         
     }
 }
-
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = "https://api.jsonbin.io/v3/b/658bccaadc74654018895226";
+    
+    const apiUrl = "https://api.jsonbin.io/v3/b/65925efbdc746540188b74a9";
+    const apiUrl2="http://localhost:3000/stars"
     const urlParams = new URLSearchParams(window.location.search);
     const tagFilter = urlParams.get('tag');
-    const planRenderer = new PlanRenderer(apiUrl, tagFilter);
+    const planRenderer = new PlanRenderer(apiUrl, tagFilter, apiUrl2);
+    planRenderer.fetchUpdateStar(apiUrl2);
     planRenderer.fetchAndRenderPlaces('.plans');
     
 });

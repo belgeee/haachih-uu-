@@ -22,6 +22,7 @@
     <script type="module" src="/favourite-count.js"></script>
     <script type="module" src="/add-place-to-card.js"></script>
     <script type="module" src="/favouritePlace.js"></script>
+    <script type="module" src="/wc-letsgo-siderbar.js"></script>
     <script src="/header-footer.js"></script>
     <script src="/mobile-header.js"></script>
     <script src="/search.js"></script>
@@ -56,63 +57,76 @@
             oninput="updatePriceValue(this.value)"
           />
  
+          
+          <!-- <todo-item>Boldoo</todo-item>
+          <todo-item>
+              Boldoo
+              <span slot="description">This is a description.</span>
+          </todo-item> -->
           <hr />
           <h3>Од</h3>
           <ol
           id="star">
-            <li>
-              <p><input type="checkbox" value="1" aria-label="1" />1-Одтой:</p>
-              <p>19</p>
-            </li>
-            <li>
-              <p><input type="checkbox" value="2" aria-label="2" />2-Одтой:</p>
-              <p>8</p>
-            </li>
-            <li>
-              <p><input type="checkbox" value="3" aria-label="3" />3-Одтой:</p>
-              <p>12</p>
-            </li>
-            <li>
-              <p><input type="checkbox" value="4" aria-label="4" />4-Одтой:</p>
-              <p>26</p>
-            </li>
-            <li>
-              <p><input type="checkbox" value="5" aria-label="5" />5-Одтой:</p>
-              <p>31</p>
-            </li>
-            <li>
-              <p><input type="checkbox" value="0" aria-label="0" />Одгүй:</p>
-              <p>123</p>
-            </li>
+          <li>
+            <p><input type="checkbox" value="1" aria-label="1" />1-Одтой:</p>
+            <p>19</p>
+          </li>
+          <li>
+            <p><input type="checkbox" value="2" aria-label="2" />2-Одтой:</p>
+            <p>8</p>
+          </li>
+          <li>
+            <p><input type="checkbox" value="3" aria-label="3" />3-Одтой:</p>
+            <p>12</p>
+          </li>
+          <li>
+            <p><input type="checkbox" value="4" aria-label="4" />4-Одтой:</p>
+            <p>26</p>
+          </li>
+          <li>
+            <p><input type="checkbox" value="5" aria-label="5" />5-Одтой:</p>
+            <p>31</p>
+          </li>
+          <li>
+            <p><input type="checkbox" value="0" aria-label="0" />Одгүй:</p>
+            <p>123</p>
+          </li>
           </ol>
  
           <hr />
           <h3>Check box</h3>
           <ol id="detail">
             <li>
-              <p><input type="checkbox" value="freewifi" aria-label="freewifi" />Үнэгүй wifi</p>
-              <p>20</p>
+              <todo-item>Үнэгүй wifi
+                <span slot="description">12</span>
+
+              </todo-item>
             </li>
             <li>
-              <p><input type="checkbox" value="viproom" aria-label="viproom" />Vip өрөө</p>
-              <p>2</p>
+              <todo-item>Vip өрөө
+                <span slot="description">12</span>
+              </todo-item>
             </li>
             <li>
-              <p><input type="checkbox" value="parking" aria-label="parking" />Машины зогсоол</p>
-              <p>25</p>
+              <todo-item>Машины зогсоол
+                <span slot="description">12</span>
+              </todo-item>
             </li>
             <li>
-              <p>
-                <input type="checkbox" value="noice" aria-label="noice" />Дуу тусгаарлагч</p>
-              <p>3</p>
+              <todo-item>Дуу тусгаарлагч
+                <span slot="description">12</span>
+              </todo-item>
             </li>
             <li>
-              <p><input type="checkbox" value="microphone" aria-label="microphone" />Микрофон</p>
-              <p>18</p>
+              <todo-item>Микрофон
+                <span slot="description">12</span>
+              </todo-item>
             </li>
             <li>
-              <p><input type="checkbox" value="speaker" aria-label="speaker" />Спикер</p>
-              <p>18</p>
+              <todo-item>Спикер
+                <span slot="description">12</span>
+                <span slot="btaa">231</span>
+              </todo-item>
             </li>
           </ol>
           <button class="filterbutton" type="button" onclick="sideFilter()" >LET'S GO</button>
